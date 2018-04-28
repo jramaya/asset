@@ -176,6 +176,7 @@ class AssetForm extends Component {
               type="button"
               className="mdc-button"
               onClick={() => this.dialog.show()}
+              disabled={true}
               value="Borrar"
           />}
           <input
