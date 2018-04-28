@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ExpenseList, ExpenseForm, LoadingBar } from "./components/index";
+import { AssetList, AssetForm, LoadingBar } from "./components/index";
 import { MDCSnackbar } from "@material/snackbar/dist/mdc.snackbar.js";
 
 import "@material/fab/dist/mdc.fab.css";
@@ -24,13 +24,13 @@ class App extends Component {
       signedIn: undefined,
       accounts: [],
       categories: [],
-      expenses: [],
+      assets: [],
       processing: true,
-      expense: {},
+      asset: {},
       currentMonth: undefined,
       currentDay: undefined,
       previousMonth: undefined,
-      showExpenseForm: false
+      showAssetForm: false
     };
 
   }
@@ -64,15 +64,15 @@ class App extends Component {
     }
   }
 
-  handleExpenseSubmit = () => {
-    this.setState({ processing: true, showExpenseForm: false });
-    const submitAction = (this.state.expense.id
+  handleAssetsubmit = () => {
+    this.setState({ processing: true, showAssetForm: false });
+    const submitAction = (this.state.Asset.id
       ? this.update
       : this.append).bind(this);
-    submitAction(this.state.expense).then(
+    submitAction(this.state.Asset).then(
       response => {
         this.snackbar.show({
-          message: `Expense ${this.state.expense.id ? "updated" : "added"}!`
+          message: `Asset ${this.state.Asset.id ? "updated" : "added"}!`
         });
         this.load();
       },
@@ -84,15 +84,15 @@ class App extends Component {
     );
   }
 
-  handleExpenseChange = (attribute, value) => {
+  handleAssetChange = (attribute, value) => {
     this.setState({
-      expense: Object.assign({}, this.state.expense, { [attribute]: value })
+      Asset: Object.assign({}, this.state.Asset, { [attribute]: value })
     });
   }
 
-  handleExpenseDelete = (expense) => {
-    this.setState({ processing: true, showExpenseForm: false });
-    const expenseRow = expense.id.substring(10);
+  handleAssetDelete = (Asset) => {
+    this.setState({ processing: true, showAssetForm: false });
+    const AssetRow = Asset.id.substring(10);
     window.gapi.client.sheets.spreadsheets
       .batchUpdate({
         spreadsheetId: this.spreadsheetId,
@@ -103,8 +103,8 @@ class App extends Component {
                 range: {
                   sheetId: 0,
                   dimension: "ROWS",
-                  startIndex: expenseRow - 1,
-                  endIndex: expenseRow
+                  startIndex: AssetRow - 1,
+                  endIndex: AssetRow
                 }
               }
             }
@@ -113,7 +113,7 @@ class App extends Component {
       })
       .then(
         response => {
-          this.snackbar.show({ message: "Expense deleted!" });
+          this.snackbar.show({ message: "Asset deleted!" });
           this.load();
         },
         response => {
@@ -124,19 +124,19 @@ class App extends Component {
       );
   }
 
-  handleExpenseSelect = (expense) => {
-    this.setState({ expense: expense, showExpenseForm: true });
+  handleAssetselect = (Asset) => {
+    this.setState({ Asset: Asset, showAssetForm: true });
   }
 
-  handleExpenseCancel = () => {
-    this.setState({ showExpenseForm: false });
+  handleAssetCancel = () => {
+    this.setState({ showAssetForm: false });
   }
 
-  onExpenseNew() {
+  onAssetNew() {
     const now = new Date();
     this.setState({
-      showExpenseForm: true,
-      expense: {
+      showAssetForm: true,
+      Asset: {
         amount: "",
         description: "",
         date: `${now.getFullYear()}-${now.getMonth() < 9
@@ -150,7 +150,7 @@ class App extends Component {
     });
   }
 
-  parseExpense(value, index) {
+  parseAsset(value, index) {
     const dateParts = value[0].split("/");
     return {
       id: `Assets!A${index + 2}`,
@@ -166,35 +166,35 @@ class App extends Component {
     };
   }
 
-  formatExpense(expense) {
+  formatAsset(Asset) {
     return [
-      `=DATE(${expense.date.substr(0, 4)}, ${expense.date.substr(
+      `=DATE(${Asset.date.substr(0, 4)}, ${Asset.date.substr(
         5,
         2
-      )}, ${expense.date.substr(-2)})`,
-      expense.description,
-      expense.account,
-      expense.category,
-      expense.amount
+      )}, ${Asset.date.substr(-2)})`,
+      Asset.description,
+      Asset.account,
+      Asset.category,
+      Asset.amount
     ];
   }
 
-  append(expense) {
+  append(Asset) {
     return window.gapi.client.sheets.spreadsheets.values.append({
       spreadsheetId: this.spreadsheetId,
       range: "Assets!A1",
       valueInputOption: "USER_ENTERED",
       insertDataOption: "INSERT_ROWS",
-      values: [this.formatExpense(expense)]
+      values: [this.formatAsset(Asset)]
     });
   }
 
-  update(expense) {
+  update(Asset) {
     return window.gapi.client.sheets.spreadsheets.values.update({
       spreadsheetId: this.spreadsheetId,
-      range: expense.id,
+      range: Asset.id,
       valueInputOption: "USER_ENTERED",
-      values: [this.formatExpense(expense)]
+      values: [this.formatAsset(Asset)]
     });
   }
 
@@ -221,8 +221,8 @@ class App extends Component {
         this.setState({
           accounts: accounts,
           categories: categories,
-          expenses: (response.result.valueRanges[2].values || [])
-            .map(this.parseExpense)
+          Assets: (response.result.valueRanges[2].values || [])
+            .map(this.parseAsset)
             .reverse()
             .slice(0, 15),
           processing: false,
@@ -323,16 +323,16 @@ class App extends Component {
   }
 
   renderAssets() {
-    if (this.state.showExpenseForm)
+    if (this.state.showAssetForm)
       return (
-        <ExpenseForm
+        <AssetForm
           categories={this.state.categories}
           accounts={this.state.accounts}
-          expense={this.state.expense}
-          onSubmit={this.handleExpenseSubmit}
-          onCancel={this.handleExpenseCancel}
-          onDelete={this.handleExpenseDelete}
-          onChange={this.handleExpenseChange}
+          Asset={this.state.Asset}
+          onSubmit={this.handleAssetsubmit}
+          onCancel={this.handleAssetCancel}
+          onDelete={this.handleAssetDelete}
+          onChange={this.handleAssetChange}
         />
       );
     else
@@ -346,14 +346,14 @@ class App extends Component {
               </h1>
             </section>
           </div>
-          <ExpenseList
-            expenses={this.state.expenses}
-            onSelect={this.handleExpenseSelect}
+          <AssetList
+            Assets={this.state.Assets}
+            onSelect={this.handleAssetselect}
           />
           <button
-            onClick={() => this.onExpenseNew()}
+            onClick={() => this.onAssetNew()}
             className="mdc-fab app-fab--absolute material-icons"
-            aria-label="Add expense"
+            aria-label="Add Asset"
           >
             <span className="mdc-fab__icon">add</span>
           </button>

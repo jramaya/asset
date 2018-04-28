@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class ExpenseIcon extends Component {
+export default class AssetIcon extends Component {
   iconFrom(category) {
     switch (category) {
       case "Corte":

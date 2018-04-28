@@ -10,7 +10,7 @@ git add .
 git commit -m "$1"
 git push origin master
 
-# expenses.chodounsky.net
+# Assets.chodounsky.net
 REACT_APP_SHEET_ID=18uwYwUAVw0H5bhszMgAORmvAN2APxAtJI3FB-XH7Dzk npm run build
 cp -a build/. production/
 cd production

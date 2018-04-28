@@ -8,9 +8,9 @@ import "@material/textfield/dist/mdc.textfield.css";
 import "@material/button/dist/mdc.button.css";
 import "@material/dialog/dist/mdc.dialog.css";
 
-import "./ExpenseForm.css";
+import "./AssetForm.css";
 
-class ExpenseForm extends Component {
+class AssetForm extends Component {
   constructor(props) {
     super(props);
 
@@ -30,7 +30,7 @@ class ExpenseForm extends Component {
     document.querySelectorAll(".mdc-textfield").forEach(selector => {
       new MDCTextfield(selector);
     });
-    if (this.props.expense.id === undefined) {
+    if (this.props.Asset.id === undefined) {
       this.amountInput.focus();
     }
   }
@@ -49,7 +49,7 @@ class ExpenseForm extends Component {
           "mdc-dialog-scroll-lock",
           ""
         );
-        this.props.onDelete(this.props.expense);
+        this.props.onDelete(this.props.Asset);
       });
     }
   }
@@ -71,7 +71,7 @@ class ExpenseForm extends Component {
               </h2>
             </header>
             <section className="mdc-dialog__body">
-              Do you really want to delete the expense?
+              Do you really want to delete the Asset?
             </section>
             <footer className="mdc-dialog__footer">
               <button
@@ -97,7 +97,7 @@ class ExpenseForm extends Component {
               ref={el => {
                 this.amountInput = el;
               }}
-              value={this.props.expense.amount}
+              value={this.props.Asset.amount}
               onChange={this.handleInputChange}
               type="number"
               step="0.01"
@@ -112,7 +112,7 @@ class ExpenseForm extends Component {
           <select
             name="category"
             className="mdc-select"
-            value={this.props.expense.category}
+            value={this.props.Asset.category}
             onChange={this.handleInputChange}
             required
           >
@@ -127,7 +127,7 @@ class ExpenseForm extends Component {
             <input
               name="description"
               className="mdc-textfield__input"
-              value={this.props.expense.description}
+              value={this.props.Asset.description}
               onChange={this.handleInputChange}
               type="text"
             />
@@ -140,7 +140,7 @@ class ExpenseForm extends Component {
             <input
               name="date"
               className="mdc-textfield__input"
-              value={this.props.expense.date}
+              value={this.props.Asset.date}
               onChange={this.handleInputChange}
               type="date"
               readOnly
@@ -154,7 +154,7 @@ class ExpenseForm extends Component {
           <select
             name="account"
             className="mdc-select"
-            value={this.props.expense.account}
+            value={this.props.Asset.account}
             onChange={this.handleInputChange}
             required
           >
@@ -168,16 +168,16 @@ class ExpenseForm extends Component {
           <input
             type="submit"
             className="mdc-button"
-            value={this.props.expense.id ? "Actualizar" : "Agregar"}
+            value={this.props.Asset.id ? "Actualizar" : "Agregar"}
             disabled={!this.state.isValid}
           />
-          {this.props.expense.id &&
+          {this.props.Asset.id &&
             <input
               type="button"
               className="mdc-button"
               onClick={() => this.dialog.show()}
               value="Borrar"
-            />}
+          />}
           <input
             type="button"
             className="mdc-button"
@@ -190,4 +190,4 @@ class ExpenseForm extends Component {
   }
 }
 
-export default ExpenseForm;
+export default AssetForm;
