@@ -28,6 +28,7 @@ class App extends Component {
       processing: true,
       expense: {},
       currentMonth: undefined,
+      currentDay: undefined,
       previousMonth: undefined,
       showExpenseForm: false
     };
@@ -337,9 +338,9 @@ class App extends Component {
         <div>
           <div className="mdc-card">
             <section className="mdc-card__primary">
-              <h2 className="mdc-card__subtitle">This month you've spent:</h2>
+              <h2 className="mdc-card__subtitle">Ventas diarias:</h2>
               <h1 className="mdc-card__title mdc-card__title--large center">
-                {this.state.currentMonth}
+                {this.state.currentDay}
               </h1>
             </section>
             <section className="mdc-card__supporting-text">
