@@ -5,6 +5,8 @@ export default class ExpenseIcon extends Component {
     switch (category) {
       case "Corte":
         return "face";
+      case "CorteGratis":
+        return "face";
       case "Ventas":
         return "shopping_cart";
       default:
