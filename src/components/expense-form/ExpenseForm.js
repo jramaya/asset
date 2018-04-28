@@ -104,7 +104,7 @@ class ExpenseForm extends Component {
               min="0"
               required
             />
-            <label className="mdc-textfield__label">Cantidad</label>
+            <label className="mdc-textfield__label">Precio</label>
           </div>
         </div>
 
