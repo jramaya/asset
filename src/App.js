@@ -152,7 +152,7 @@ class App extends Component {
   parseExpense(value, index) {
     const dateParts = value[0].split("/");
     return {
-      id: `Expenses!A${index + 2}`,
+      id: `Assets!A${index + 2}`,
       date: `20${dateParts[2]}-${dateParts[1].length === 1
         ? "0" + dateParts[1]
         : dateParts[1]}-${dateParts[0].length === 1
@@ -181,7 +181,7 @@ class App extends Component {
   append(expense) {
     return window.gapi.client.sheets.spreadsheets.values.append({
       spreadsheetId: this.spreadsheetId,
-      range: "Expenses!A1",
+      range: "Assets!A1",
       valueInputOption: "USER_ENTERED",
       insertDataOption: "INSERT_ROWS",
       values: [this.formatExpense(expense)]
@@ -204,7 +204,7 @@ class App extends Component {
         ranges: [
           "Data!A2:A50",
           "Data!E2:E50",
-          "Expenses!A2:F",
+          "Assets!A2:F",
           "Current!H1",
           "Previous!H1"
         ]
@@ -314,12 +314,12 @@ class App extends Component {
     else
       return (
         <div className="content">
-          {this.renderExpenses()}
+          {this.renderAssets()}
         </div>
       );
   }
 
-  renderExpenses() {
+  renderAssets() {
     if (this.state.showExpenseForm)
       return (
         <ExpenseForm
