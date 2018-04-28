@@ -207,7 +207,8 @@ class App extends Component {
           "Data!E2:E50",
           "Assets!A2:F",
           "Current!H1",
-          "Previous!H1"
+          "Previous!H1",
+          "CurrentDay!A2",
         ]
       })
       .then(response => {
@@ -225,7 +226,7 @@ class App extends Component {
             .reverse()
             .slice(0, 15),
           processing: false,
-          currentDay: response.result.valueRanges[3].values[0][1],
+          currentDay: response.result.valueRanges[5].values[0][0],
           currentMonth: response.result.valueRanges[3].values[0][0],
           previousMonth: response.result.valueRanges[4].values[0][0]
         });
