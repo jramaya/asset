@@ -338,7 +338,7 @@ class App extends Component {
         <div>
           <div className="mdc-card">
             <section className="mdc-card__primary">
-              <h2 className="mdc-card__subtitle">Ventas diarias:</h2>
+              <h2 className="mdc-card__subtitle">Ingresos de hoy:</h2>
               <h1 className="mdc-card__title mdc-card__title--large center">
                 {this.state.currentDay}
               </h1>
