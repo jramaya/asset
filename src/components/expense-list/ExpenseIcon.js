@@ -3,22 +3,10 @@ import React, { Component } from 'react';
 export default class ExpenseIcon extends Component {
   iconFrom(category) {
     switch (category) {
-      case "Groceries":
-        return "local_grocery_store";
-      case "Restaurants":
-        return "local_dining";
-      case "Car":
-        return "directions_car";
-      case "Hobbies":
-        return "local_library";
-      case "Household":
-        return "home";
-      case "Shopping":
-        return "local_mall";
-      case "Health":
-        return "local_hospital";
-      case "Entertainment":
-        return "local_movies";
+      case "Corte":
+        return "face";
+      case "Ventas":
+        return "shopping_cart";
       default:
         return "attach_money";
     }

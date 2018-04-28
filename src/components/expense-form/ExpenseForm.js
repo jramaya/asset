@@ -104,7 +104,7 @@ class ExpenseForm extends Component {
               min="0"
               required
             />
-            <label className="mdc-textfield__label">Amount</label>
+            <label className="mdc-textfield__label">Cantidad</label>
           </div>
         </div>
 
@@ -131,7 +131,7 @@ class ExpenseForm extends Component {
               onChange={this.handleInputChange}
               type="text"
             />
-            <label className="mdc-textfield__label">Description</label>
+            <label className="mdc-textfield__label">Descripción</label>
           </div>
         </div>
 
@@ -143,9 +143,10 @@ class ExpenseForm extends Component {
               value={this.props.expense.date}
               onChange={this.handleInputChange}
               type="date"
+              readOnly
               required
             />
-            <label className="mdc-textfield__label">Date</label>
+            <label className="mdc-textfield__label">Fecha</label>
           </div>
         </div>
 
@@ -167,7 +168,7 @@ class ExpenseForm extends Component {
           <input
             type="submit"
             className="mdc-button"
-            value={this.props.expense.id ? "Update" : "Add"}
+            value={this.props.expense.id ? "Actualizar" : "Agregar"}
             disabled={!this.state.isValid}
           />
           {this.props.expense.id &&
@@ -175,13 +176,13 @@ class ExpenseForm extends Component {
               type="button"
               className="mdc-button"
               onClick={() => this.dialog.show()}
-              value="Delete"
+              value="Borrar"
             />}
           <input
             type="button"
             className="mdc-button"
             onClick={() => this.props.onCancel()}
-            value="Close"
+            value="Cerrar"
           />
         </div>
       </form>
