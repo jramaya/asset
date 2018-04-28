@@ -225,6 +225,7 @@ class App extends Component {
             .reverse()
             .slice(0, 15),
           processing: false,
+          currentDay: response.result.valueRanges[3].values[0][1],
           currentMonth: response.result.valueRanges[3].values[0][0],
           previousMonth: response.result.valueRanges[4].values[0][0]
         });
@@ -342,9 +343,6 @@ class App extends Component {
               <h1 className="mdc-card__title mdc-card__title--large center">
                 {this.state.currentDay}
               </h1>
-            </section>
-            <section className="mdc-card__supporting-text">
-              Previous month: {this.state.previousMonth}
             </section>
           </div>
           <ExpenseList
