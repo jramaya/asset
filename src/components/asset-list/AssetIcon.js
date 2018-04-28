@@ -4,11 +4,21 @@ export default class AssetIcon extends Component {
   iconFrom(category) {
     switch (category) {
       case "Corte":
-        return "face";
+        return "content_cut";
       case "CorteGratis":
-        return "face";
+        return "content_cut";
       case "Ventas":
         return "shopping_cart";
+      case "CorteNino":
+        return "child_care";
+      case "CorteEmpleadoMetro":
+        return "content_cut";
+      case "FacialProfundo":
+        return "face";
+      case "Exfoliacion":
+        return "face";
+      case "CorteCejas":
+        return "visibility";
       default:
         return "attach_money";
     }
