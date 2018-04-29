@@ -218,6 +218,13 @@ class App extends Component {
         const categories = response.result.valueRanges[1].values.map(
           items => items[0]
         );
+        var _currentDay;
+        try {//Curate currentDay income value
+        _currentDay = response.result.valueRanges[5].values[0][0];
+        } catch (error) {
+          _currentDay = 0.0
+        }
+        
         this.setState({
           accounts: accounts,
           categories: categories,
@@ -226,7 +233,7 @@ class App extends Component {
             .reverse()
             .slice(0, 15),
           processing: false,
-          currentDay: response.result.valueRanges[5].values[0][0],
+          currentDay: _currentDay,
           currentMonth: response.result.valueRanges[3].values[0][0],
           previousMonth: response.result.valueRanges[4].values[0][0]
         });
